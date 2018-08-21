@@ -1,0 +1,60 @@
+Steps to install docker :-
+
+1. curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+2. sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+3. sudo apt-get update
+
+4. apt-cache policy docker-ce
+
+5. sudo apt-get install -y docker-ce
+
+6. sudo systemctl status docker
+
+
+
+To check Docker Images :- 
+  sudo docker images
+
+Remove Docker image :-
+  docker rmi ImageID
+  ## if conflicts come
+  sudo docker rmi $(sudo docker images --filter "dangling=true" -q --no-trunc) -f 
+
+
+
+unite docker:
+FROM tomcat:8.0.52-jre8
+
+COPY unite.webservice.war /usr/local/tomcat/webapps/unite.war
+
+COPY server.xml /usr/local/tomcat/conf/server.xml
+
+EXPOSE 9000
+
+run /usr/local/tomcat/bin/startup.sh
+
+
+
+## for creating image of docker script which is a DockerFile
+docker build -t test .
+
+## running the docker image on exposed port with image
+docker run -p 8888:8888 test
+
+## for checking currently running all containers of docker
+docker ps
+
+docker-compose
+
+
+UNITE on DOCKER ::-
+ sudo docker run -it -p 9000:9000 -v ~/container_logs:/usr/local/tomcat/logs/ unite_docker
+
+
+RABBIT-MQ on docker ::-
+	rabbit-1
+		sudo docker run -d -h node-1.rabbit --name rabbit-1 -p "4369:4369" -p "5672:5672" -p "15672:15672" -p "25672:25672" -p "35197:35197" -e "RABBITMQ_USE_LONGNAME=true" -e "RABBITMQ_LOGS=/var/log/rabbitmq/rabbit.log" -v /home/administrator/rabbit-mq/rabbit-mq/rabbit-1/data:/var/lib/rabbitmq -v /home/administrator/rabbit-mq/rabbit-mq/rabbit-1/logs:/var/log/rabbitmq rabbitmq:3.7.7-management
+
+
