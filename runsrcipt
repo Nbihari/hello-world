@@ -1,0 +1,1 @@
+sudo docker run  -p 9200:9200 --net=host -p 9300:9300 --net=host  elastic-custom
